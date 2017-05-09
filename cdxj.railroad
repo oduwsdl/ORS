@@ -1,0 +1,16 @@
+Diagram(
+  OneOrMore(
+    Optional(
+      Sequence(
+        ZeroOrMore(
+          Sequence(
+            NonTerminal('Key String'),
+            Terminal('WHITESPACE')
+          )
+        ),
+        NonTerminal('Value SingleLineJSON')
+      )
+    ),
+    Terminal('NEWLINE')
+  )
+)

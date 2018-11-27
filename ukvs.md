@@ -41,3 +41,15 @@ Shmoe | Joe     | -             | Assistant           | -                       
 This table illustrates two major issues: 1) fields with sparse values are wasteful and 2) adding a new field (e.g., `Award3`) will affect all existing rows.
 Additionally, the tabular formats like CSV/TSV have no information about what fields can be used as lookup keys.
 UKVS solves both of these issues as illustrated above.
+
+This format was first realized to express holdings of a web archive (as part of the IIPC-funded Web Archive Profiling work).
+While it is generic enough to be used in many key-value storage systems, in the Web Archiving community we can see numerous use cases.
+Some of those use cases are described below:
+
+* *MementoMap/Archive Profile* - MementoMap is a framework to describe the holdings of a web archive (AKA Archive Profiles) in a flexible and concise manner which is inspired by the simplicity of `sitemap` and `robots.txt`.
+* *CDX File/Server* - Archival replay systems use CDX index files or servers to lookup URIs in their holdings, but the traditional format is restrictive in the sense that it does not allow arbitrary extensions and metadata for each entry that might be useful while UKVS can facilitate it.
+* *Archive ACL* - Web archiving tools have no agreed upon mechanism to implement Access Control List (ACL), as a result every organization is using their own methods and additional layers to handle it, but UKVS can provide a uniform means to express ACLs both internally or publicly.
+* *Archive Fixity* - Fixity or integrity of archived resources is important to establish trust in web archives, but so far very little work has been done on this, though, UKVS can provide a means to express fixity information in a flexible and future-proof manner as the specifications around this work evolve.
+* *Extended TimeMap* - The `Link` format used in TimeMaps as per the RFC7089 is very limiting when it comes to express anything other than the `URI-M` and `Memento-Datetime` for `memento` relation type, but from a utility perspective many more fields can be useful such as `Status`, `Content-Digest`, `Access`, and `Damage-Score` etc. that can be enabled by UKVS.
+
+We believe that having a unified mechanism to handle various aspects of web arching will allow us to build better and interoperable tools that will be reusable for more than one purposes.

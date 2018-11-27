@@ -84,8 +84,17 @@ uk,co,bbc)/images/* 300
 The example above has two parts, first five lines are headers and the last five lines are data records.
 The `!context` entry in the header section describes where to look for definitions and descriptions of terms used in the document.
 The `!id` entry points to the web archive the MementoMap is about.
-The `!fields` entry suggests that in the data records there are only two mandatory fields of which the first one is a Sort-friendly URI Reordering Transform (SURT) of the lookup URI that is used as the key and the second field holds the frequency of archiving for a given SURT key.
-SURT in this case can be partial and supports wildcard to represent a collection of URIs.
+The `!fields` entry suggests that in the data records there are only two mandatory fields of which the first one is a SURT (a transformation of URIs that we describe below) of the lookup URI that is used as the key and the second field holds the frequency of archiving for a given SURT key.
 The first data rwo `* 54321` suggests that there are a total of 54321 mementos of all the URIs in the archive while `com,* 10000` suggests that there are 10000 mementos that have `.com` TLD in their URIs.
 Next tow entries suggest that the root page of `twitter.com` has 100 mementos, but all the URIs from `twitter.com` collectively have a total of 250 mementos.
 Finally, there are 300 mementos of resources from `bbc.co.uk` who's path begins with `/images/`.
+
+### The surt Field
+
+Sort-friendly URI Reordering Transform (SURT), as the name suggests, is a transformation of URIs to make them sort-friendly.
+In usual URIs hostname segments are delimited by dots `.` and their top level segments appear towards the right hand side while path segments are delimited using forward slashes `/` and their top-level directories are located towards the left hand side.
+Due to this discrepancy, if a list of URIs is sorted alphabetically, various sub-domains of the same site might end up in different locations.
+In some applications, especially in archival lookup, it is helpful to keep all records from the same site together.
+To achieve this goal, hostname segments are reversed and delimited using commas so `bbc.co.uk/images` becomes `uk,co,bbc)/images`.
+Before transforming to SURT, URIs are generally also canonicalized so that different variations of the same URI do not cause multiple entries in the index.
+SURT are generally reversible, but in the MementoMap context (and anywhere where they are used as index keys) we can add support for partial SURTs with the help of wildcards to represent a collection of URIs.

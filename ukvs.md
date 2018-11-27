@@ -53,3 +53,39 @@ Some of those use cases are described below:
 * *Extended TimeMap* - The `Link` format used in TimeMaps as per the RFC7089 is very limiting when it comes to express anything other than the `URI-M` and `Memento-Datetime` for `memento` relation type, but from a utility perspective many more fields can be useful such as `Status`, `Content-Digest`, `Access`, and `Damage-Score` etc. that can be enabled by UKVS.
 
 We believe that having a unified mechanism to handle various aspects of web arching will allow us to build better and interoperable tools that will be reusable for more than one purposes.
+
+## MementoMap/Archive Profile
+
+MementoMap is a framework to describe the holdings of a web archive (AKA Archive Profiles) in a flexible and concise manner.
+It is inspired by the simplicity of [sitemap](https://en.wikipedia.org/wiki/Sitemaps) and [robots.txt](http://www.robotstxt.org/), but different from them in some aspects:
+
+* Unlike sitemap and robots.txt, MementoMap of an archive can be published by third parties, not just the archives.
+* Unlike sitemap, MementoMap may use wildcard in URIs (similar to robots.txt) to reduce the number of records significantly.
+* Unlike sitemap.txt, MementoMap can have flat pagination (generally more suitable for sorted resources) where page can link to next, previous, first, and last pages instead of a nested index of MementoMap pages.
+* Unlike robots.txt, MementoMap is safe to sort, split, and merge.
+* Provides means of variations in organizing various fields to optimize for space and application-specif usability while keeping the essence of records the same.
+* Enables means to limit the size of the file or the number of records and dynamically adapt to it.
+
+Starting with a simple example below:
+
+```
+!context ["http://oduwsdl.github.io/contexts/ukvs"]
+!id {uri: "http://archive.example.org/"}
+!fields {keys: ["surt"], values: ["frequency"]}
+!meta {type: "MementoMap", name: "A Test Web Archive", year: 1996}
+!meta {updated_at: "2018-09-03T13:27:52Z"}
+* 54321
+com,* 10000
+com,twitter)/ 100
+com,twitter)/* 250
+uk,co,bbc)/images/* 300
+```
+
+The example above has two parts, first five lines are headers and the last five lines are data records.
+The `!context` entry in the header section describes where to look for definitions and descriptions of terms used in the document.
+The `!id` entry points to the web archive the MementoMap is about.
+The `!fields` entry suggests that in the data records there are only two mandatory fields of which the first one is a Sort-friendly URI Reordering Transform (SURT) of the lookup URI that is used as the key and the second field holds the frequency of archiving for a given SURT key.
+SURT in this case can be partial and supports wildcard to represent a collection of URIs.
+The first data rwo `* 54321` suggests that there are a total of 54321 mementos of all the URIs in the archive while `com,* 10000` suggests that there are 10000 mementos that have `.com` TLD in their URIs.
+Next tow entries suggest that the root page of `twitter.com` has 100 mementos, but all the URIs from `twitter.com` collectively have a total of 250 mementos.
+Finally, there are 300 mementos of resources from `bbc.co.uk` who's path begins with `/images/`.

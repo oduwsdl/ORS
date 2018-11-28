@@ -231,3 +231,39 @@ Knowing the distribution of certain mementos over their `status` codes could hel
 Similarly, knowing about the number of redirects (i.e., recorded `3xx` responses) can give a better estimate of useful holdings of resources in an archive.
 
 The OSLJ block is also open for application specific data or custom fields for specific human-friendly notes.
+
+### Generating MementoMap
+
+TODO: Publish scripts that generate MementoMap files and explore the possibility of integrating it into existing archival replay tools or CDX servers.
+
+### Compacting MementoMap
+
+TODO: Describe rules to dynamically optimize MementoMap files based on quota of resources.
+
+## CDX File/Server
+
+TODO: Describe relevant mandatory and optional fields.
+
+## Archive ACL
+
+TODO: Describe relevant mandatory and optional fields.
+
+## Archive Fixity
+
+TODO: Describe relevant mandatory and optional fields.
+
+## Extended TimeMap
+
+TODO: Describe relevant mandatory and optional fields.
+
+## UKVS Parser Considerations
+
+TODO: Describe rules for a UKVS parser that can understand fields and express records in their expanded JSON format on demand.
+
+## Lookup Rules
+
+TODO: Describe how specificity and precedence rules would work when looking up for a value using one or more key fields.
+
+## Split and Merge Rules
+
+TODO: Describe how to transform compatible files to merge together or split

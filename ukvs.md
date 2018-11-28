@@ -121,7 +121,7 @@ The first record in the example above suggests that there are 300 mementos of al
 The second record suggests that there are a total of 100 unique URI-Rs (original URIs) from `cnn.com` that are archived a total of 400 times, that means on an average each URI is archived four times.
 In the next entry, `200/` suggests that there are 200 URI-Ms from `example.com`, but the number of unique URI-Rs is unknown.
 This entry is equivalent to saying `200` as the separator sign (i.e., forward slash `/`) is optional when only the URI-M count is known.
-The decision to make the separator optional here is to save bytes in the case that is goint to be potentially more common as counting mementos (URI-Ms) is generally easier for web archives than counting unique URI-Rs.
+The decision to make the separator optional here is to save bytes in the case that is goint to be potentially more common as counting mementos (URI-Ms) and updating URI-M counts are generally easier than counting unique URI-Rs and updating the URI-R count later.
 In the next entry, `/50` suggests that the number of unique URI-Rs from `facebook.com` that are archived is 50, but how many times are they archived (URI-M count) in unknown.
 The separator in this case is mandatory to avoid ambiguity.
 When neither URI-M nor URI-R counts are known, an explicit `/` is mandatory (as illustrated for `google.com`) to be used as the placeholder and to signify that none of the counts are known.

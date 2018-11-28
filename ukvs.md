@@ -111,9 +111,9 @@ However, it also allows to express number of unique URIs (URI-R counts) along wi
 com,apple)/*    300
 com,cnn)/*      400/100
 com,example)/*  200/
-com,facebook)/*    /50
-com,google)/*      /
-com,twitter)/*    0
+com,facebook)/* /50
+com,google)/*   /
+com,twitter)/*  0
 ```
 
 The format of the frequency field here is `[<urim-count>]/[<urir-count>]`.

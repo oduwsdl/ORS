@@ -200,3 +200,24 @@ We have also avoided unnecessary bytes that were only present to format a valid 
 However, we have introduced more lines that repeat the value of the `surt` field.
 Also, if not all entries have frequency values decomposed over time, then the corresponding column will have unnecessary placeholder (a `:` symbol in this case).
 So, there is clearly a trade-off here that can be evaluated based on the nature of an archive and optimized accordingly.
+
+Potential values of the `datetime` field include valid sub-strings of the 14-digit date and time format (`YYYY[MM[DD[hh[mm[ss]]]]]`) or a range composed of such sub-strings separated by a colon `:` symbol.
+If the start or the end of the range is not given it is considered the beginning of archiving and the current time respectively.
+
+```
+!fields {keys: ["surt", "datetime"], values: ["frequency"]}
+com,apple)/  20160213052637 1
+com,apple)/* 20160213       20
+com,apple)/* 2010:2012      100
+com,apple)/* :2009          50
+com,apple)/* 201603:        120
+com,apple)/* :              300
+```
+
+The example above (intentionally unsorted for gradual explanation) illustrates different scenarios `datetime` field can be specified.
+The first entry suggests that the root page of the `apple.com` is archive exactly once at the exact time `20160213052637` (i.e., `2016/02/13 05:26:37 UTC`).
+The second line suggests that URI-Rs from `apple.com` were archived a total of 20 times on February 13, 2016 (i.e., their `Memento-Datetime` in 14-digit format has a prefix of `20160213`).
+The next entry of `2010:2012` suggests that there are 100 mementos of `apple.com` URIs from year 2010 to 2012.
+The next line with `:2009` suggests that there are 50 mementos with `datetime` in 2009 and before.
+The entry with `201603:` suggests that there are a total of 120 mementos starting from March 2016 till now.
+Finally, the last line suggests that there are an over all 300 mementos of `apple.com` URI-Rs.

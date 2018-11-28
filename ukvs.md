@@ -19,16 +19,17 @@ Following is a simple example (with some details omitted, which we will include 
 
 ```
 !fields {keys: ["lname", "fname"], values: ["qualification", "profession"]}
-Doe Jane PhD Professor {home: "https://example.edu/members/jdoe"}
-Doe John Masters "Business Consultant"
-Roe Richard PhD Scientist {dob: "May 7, 1920", awards: ["Fiction 42", "Mad Scientist"]}
-Shmoe Joe - Assistant
+Doe   Jane    PhD     Professor             {home: "https://example.edu/members/jdoe"}
+Doe   John    Masters "Business Consultant"
+Roe   Richard PhD     Scientist             {dob: "May 7, 1920", awards: ["Fiction 42", "Mad Scientist"]}
+Shmoe Joe     -       Assistant
 ```
 
 The `!fields` metadata here describes the structure of the data records where the first two fields `lname` and `fname` are primary and secondary lookup keys respectively.
 The third and fourth fields represent corresponding values as `qualification` and `profession` respectively.
 These four fields are mandatory, so their missing or unknown values must be filled with a placeholder (as illustrated in the last row with a `-` sign).
 Fields other than Optional Single Line JSON (OSLJ) are separated by white-spaces and multi-token values are quoted in double quotes.
+While multiple consecutive white-spaces are allowed for readability, they should be avoided to save bytes as per the application needs.
 So far, this format is similar to CSV/TSV files (or other tabular data formats), but the addition of the OSLJ block allows each record to have arbitrary data, unique to each record, in a structured way.
 If the same information was to be represented in tabular format, it would look something like the following:
 
@@ -75,10 +76,10 @@ Starting with a simple example below:
 !fields {keys: ["surt"], values: ["frequency"]}
 !meta {type: "MementoMap", name: "A Test Web Archive", year: 1996}
 !meta {updated_at: "2018-09-03T13:27:52Z"}
-* 54321
-com,* 10000
-com,twitter)/ 100
-com,twitter)/* 250
+*                   54321
+com,*               10000
+com,twitter)/       100
+com,twitter)/*      250
 uk,co,bbc)/images/* 300
 ```
 
@@ -107,12 +108,12 @@ In its simple form it represents the number of mementos (or URI-M counts) of a U
 However, it also allows to express number of unique URIs (URI-R counts) along with their URI-M counts for a given set of URIs using a wildcard as illustrated below:
 
 ```
-com,apple)/* 300
-com,cnn)/* 400/100
-com,example)/* 200/
-com,facebook)/* /50
-com,google)/* /
-com,twitter)/* 0
+com,apple)/*    300
+com,cnn)/*      400/100
+com,example)/*  200/
+com,facebook)/*    /50
+com,google)/*      /
+com,twitter)/*    0
 ```
 
 The format of the frequency field here is `[<urim-count>]/[<urir-count>]`.
@@ -128,9 +129,9 @@ An explicit value of zero URI-Ms (as illustrated for `twitter.com`) gives a mean
 An explicit zero memento count in a MementoMap is also useful to express holdings of a bigger set, but lack of holdings in some of its subsets as illustrated below:
 
 ```
-com,cnn)/* 400
+com,cnn)/*          400
 com,cnn)/profiles/* 0
-com,cnn)/world 0
+com,cnn)/world      0
 ```
 
 This example suggests that there are a total of 400 URI-Ms for `example.com`, but zero mementos for URI-Rs that start with `cnn.com/profiles/` and zero mementos for the URI-R `cnn.com/world`.

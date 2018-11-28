@@ -144,3 +144,31 @@ com,yahoo)/* 0/20
 ```
 
 This can be useful to report the number of URI-Rs that are blocked for legal reasons, in embargo period, or added in the seed list or frontier queue of the crawler, but not yet ready to be replayed.
+
+Counting mementos and unique original URIs and keeping track of these numbers as the archive grows is a difficult task.
+For third-party observers it is often impractical to estimate exact values of these counts.
+Additionally, when counting is performed on subsets of the archival collection and merged, it is difficult to maintain the accuracy of these counts.
+Luckily, in many use cases a rough estimate might be good enough while avoiding the cost of maintaining exact values.
+However, it is important to acknowledge whether a frequency value is exact or a rough estimate.
+This can be expressed using following symbol suffixes to either of the URI-M or URI-R counts (or both):
+
+* No suffix for an exact value
+* `+` suffix for a lower boundary
+* `-` suffix for an upper boundary
+* `~` for an approximate value
+
+```
+com,apple)/*    300
+com,cnn)/*      400+/100
+com,example)/*  200-/150~
+com,facebook)/* /50+
+```
+
+The example above illustrates that there are:
+
+* exactly 300 mementos for `apple.com` URI-Rs,
+* at least 400 mementos for exactly 100 unique `cnn.com` URI-Rs,
+* at most 200 mementos for approximately 150 unique `example.com` URI-Rs, and
+* an unknown number of mementos for at least 50 unique `facebook.com` URI-Rs
+
+These looseness symbols can be used (optionally) with any numeric values of URI-M and URI-R counts independently to form different combinations.

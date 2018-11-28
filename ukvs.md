@@ -176,6 +176,7 @@ These looseness symbols can be used (optionally) with any numeric values of URI-
 ### The datetime Field
 
 So far, we have been using `surt` as the only lookup key with no information about how the archiving activity of a URI-R or a set of URI-Rs is distributed over time.
+Knowing about the temporal activity could be very helpful for Memento routing (and many other applications) for resources that were actively archived during a short period of time and hardly had any archival activity for the rest of the time.
 To express the distribution of archiving activity over time the Optional Single Line JSON (OSLJ) block can be utilized as illustrated below (repeated headers are omitted for brevity):
 
 ```
@@ -221,3 +222,12 @@ The next entry of `2010:2012` suggests that there are 100 mementos of `apple.com
 The next line with `:2009` suggests that there are 50 mementos with `datetime` in 2009 and before.
 The entry with `201603:` suggests that there are a total of 120 mementos starting from March 2016 till now.
 Finally, the last line suggests that there are an over all 300 mementos of `apple.com` URI-Rs.
+
+### Other fields
+
+A MementoMap may also contain `frequency` information decomposed over other useful fields such as `status`, `language`, and `mime` etc.
+One or more of these fields can be included in the OSLJ or as key fields (or a combination of both) as described the usage of the `datetime` field above.
+Knowing the distribution of certain mementos over their `status` codes could help reduce unnecessary traffic for resources that were captured numerous times, but resulted largely in `5xx` codes.
+Similarly, knowing about the number of redirects (i.e., recorded `3xx` responses) can give a better estimate of useful holdings of resources in an archive.
+
+The OSLJ block is also open for application specific data or custom fields for specific human-friendly notes.

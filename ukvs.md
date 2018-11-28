@@ -240,6 +240,10 @@ TODO: Publish scripts that generate MementoMap files and explore the possibility
 
 TODO: Describe rules to dynamically optimize MementoMap files based on quota of resources.
 
+### Dissemination
+
+TODO: Describe advertisement and discovery methods of MementoMap files and their pagination options.
+
 ## CDX File/Server
 
 TODO: Describe relevant mandatory and optional fields.

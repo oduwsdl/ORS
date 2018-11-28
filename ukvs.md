@@ -172,3 +172,31 @@ The example above illustrates that there are:
 * an unknown number of mementos for at least 50 unique `facebook.com` URI-Rs
 
 These looseness symbols can be used (optionally) with any numeric values of URI-M and URI-R counts independently to form different combinations.
+
+### The datetime Field
+
+So far, we have been using `surt` as the only lookup key with no information about how the archiving activity of a URI-R or a set of URI-Rs is distributed over time.
+To express the distribution of archiving activity over time the Optional Single Line JSON (OSLJ) block can be utilized as illustrated below (repeated headers are omitted for brevity):
+
+```
+!fields {keys: ["surt"], values: ["frequency"]}
+com,twitter)/* 100/35 {datetime: {"2014": "20~/10", "2015": "60+/30+"}}
+```
+
+This example suggests that there are a total of exactly 100 mementos of exactly 35 unique URI-Rs from `twitter.com`.
+The OSLJ block further decomposes this `frequency` value and suggests that in the year 2014 exactly 10 unique URI-Rs were archived about 20 times and more than 30 unique URI-Rs were archived more than 60 times in 2015.
+
+This information can alternatively be expressed with a different organization as illustrated below:
+
+```
+!fields {keys: ["surt", "datetime"], values: ["frequency"]}
+com,twitter)/* :    100/35
+com,twitter)/* 2014 20~/10
+com,twitter)/* 2015 60+/30+
+```
+
+We have moved the information buried inside of the OSLJ into a secondary key field as the first two columns `["surt", "datetime"]` are now lookup keys, making it easier to process using traditional text processing tools.
+We have also avoided unnecessary bytes that were only present to format a valid JSON block and moved the name of the field in the UKVS headers instead of repeating it with each record.
+However, we have introduced more lines that repeat the value of the `surt` field.
+Also, if not all entries have frequency values decomposed over time, then the corresponding column will have unnecessary placeholder (a `:` symbol in this case).
+So, there is clearly a trade-off here that can be evaluated based on the nature of an archive and optimized accordingly.
